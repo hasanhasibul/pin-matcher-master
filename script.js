@@ -9,16 +9,25 @@ generator.addEventListener('click',function(){
     generateRandom = generatorInput.value;
 })
 // Input number Pat Area 
-const button = document.getElementsByClassName('button');
 const buttonInput = document.getElementById('buttonInput');
+const button = document.getElementsByClassName('button');
 let screenButtonInput = '';
-console.log(typeof(screenButtonInput))
 for (let i = 0; i < button.length; i++) {
     const element = button[i];
     element.addEventListener('click',function(event){
         const buttonText =event.target.innerText;
-        screenButtonInput += buttonText;
-        buttonInput.value=screenButtonInput;
+        if(buttonText== 'C'){
+            screenButtonInput="";
+            buttonInput.value = screenButtonInput;
+        }
+        else if(buttonText == '<'){
+            screenButtonInput = screenButtonInput.slice(0,screenButtonInput.length-1);
+            buttonInput.value = screenButtonInput;
+        }
+        else{
+            screenButtonInput += buttonText;
+            buttonInput.value=screenButtonInput;
+        }
     })  
 }
 
@@ -33,12 +42,15 @@ document.getElementById('submitButton').addEventListener('click',function(){
         if(generateRandom == screenButtonInput ){
         const rightNotify = document.getElementById('rightNotify');
         rightNotify.style.display='block';
-        buttonInput.value="";
+        wrongNotify.style.display='none';
+        screenButtonInput="";
+        buttonInput.value = screenButtonInput;
     }
     else{
         const wrongNotify = document.getElementById('wrongNotify');
         wrongNotify.style.display='block';
-        buttonInput.value="";
+        screenButtonInput="";
+        buttonInput.value = screenButtonInput;
     }
      }
 else{
